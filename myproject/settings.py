@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "drf_yasg",
+    "user",
 
 ]
 
@@ -120,3 +121,5 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_TRUSTED_ORIGINS = [
    "http://127.0.0.1:8000/",
 ]
+
+AUTH_USER_MODEL = 'user.User'
