@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import os
 from pathlib import Path
+from datetime import timedelta
 
 load_dotenv()
 
@@ -27,6 +28,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "drf_yasg",
     "user",
+    "rest_framework_simplejwt",
 
 ]
 
@@ -75,8 +77,6 @@ DATABASES = {
 }
 
 
-
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -93,7 +93,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"
@@ -101,7 +100,6 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
-
 
 
 STATIC_URL = "static/"
@@ -123,3 +121,13 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 AUTH_USER_MODEL = 'user.User'
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated",],
+    "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_simplejwt.authentication.JWTAuthentication",),
+}
+
+SIMPLE_JWT = {
+   'ACCESS_TOKEN_LIFETIME': timedelta(minutes=500),    ############################# поменять на 5 минут
+   'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+}
