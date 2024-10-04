@@ -4,6 +4,7 @@ from rest_framework import filters
 from rest_framework.generics import CreateAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView, ListAPIView
 
 from announcement.models import Announcement, Feedback
+from announcement.paginators import CustomPagination
 from announcement.serializers import AnnouncementSerializer, FeedbackSerializer
 
 
@@ -18,8 +19,9 @@ class AnnouncementCreateApiView(CreateAPIView):
 class AnnouncementListApiView(ListAPIView):
     queryset = Announcement.objects.all()
     serializer_class = AnnouncementSerializer
+    pagination_class = CustomPagination    # пагинация
 
-    # abkmnhfwbz
+    # фильтрация товаров по названию
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
     filterset_fields = ('title',)
 
