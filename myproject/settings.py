@@ -31,6 +31,8 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "announcement",
     "django_filters",
+    "djoser",
+    "rest_framework.authtoken",
 
 ]
 
@@ -126,11 +128,34 @@ AUTH_USER_MODEL = 'user.User'
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated",],
-    "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_simplejwt.authentication.JWTAuthentication",),
+    "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_simplejwt.authentication.JWTAuthentication",
+                                       "rest_framework.authentication.TokenAuthentication",),
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
 
 SIMPLE_JWT = {
-   'ACCESS_TOKEN_LIFETIME': timedelta(minutes=500),    ############################# поменять на 5 минут
-   'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=500),    ############################# поменять на 5 минут
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'AUTH_HEADER_TYPES': ('JWT',),
 }
+
+DJOSER = {
+    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': '#/activate/{uid}/{token}',
+    'SEND_ACTIVATION_EMAIL': False,    #регистрация пользователя без подтверждения имейла
+    'SERIALIZERS': {
+        'user_create': 'user.serializers.UserSerializer',    #еспользуется мой serializers для регистрации
+        'user': 'user.serializers.UserSerializer',
+                     },
+}
+
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = "py.ma.1@mail.ru"
+EMAIL_HOST_PASSWORD = "kc0uSNRYAXFdwEwqNapj"
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
