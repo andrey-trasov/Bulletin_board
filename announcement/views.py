@@ -80,7 +80,7 @@ class FeedbackListApiView(ListAPIView):
     """
     queryset = Feedback.objects.all()
     serializer_class = FeedbackSerializer
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
 
 
 class FeedbackRetrieveApiView(RetrieveAPIView):

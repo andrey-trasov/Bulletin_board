@@ -24,10 +24,17 @@ schema_view = get_schema_view(
 
 
 urlpatterns = [
+    # urls приложений
     path("admin/", admin.site.urls),
-    path("user/", include("user.urls", namespace="user")),
+    # path("user/", include("user.urls", namespace="user")),
     path("announcement/", include("announcement.urls", namespace="announcement")),
 
+    # urls user
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.authtoken')),
+    path('auth/', include('djoser.urls.jwt')),
+
+    # urls Swagger
     path("swagger<format>/", schema_view.without_ui(cache_timeout=0), name="schema-json"),
     path("swagger/", schema_view.with_ui("swagger", cache_timeout=0), name="schema-swagger-ui"),
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
