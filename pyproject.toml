@@ -17,6 +17,8 @@ drf-yasg = "^1.21.7"
 djangorestframework-simplejwt = "^5.3.1"
 djoser = "^2.2.3"
 black = "^24.10.0"
+setuptools = "^75.1.0"
+django-filter = "^24.3"
 
 
 [build-system]
