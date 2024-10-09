@@ -3,6 +3,7 @@ from django.db import models
 
 NULLABLE = {"null": True, "blank": True}
 
+
 class User(AbstractUser):
     username = None
 
@@ -11,13 +12,14 @@ class User(AbstractUser):
     last_name = models.CharField(max_length=50, verbose_name="фамилия пользователя")
     phone = models.CharField(max_length=20, verbose_name="телефон для связи")
 
-    Roles  = [
-        ("user", "пользователь"),
-        ("admin", "администратор")
-    ]
+    Roles = [("user", "пользователь"), ("admin", "администратор")]
 
-    role  = models.CharField(max_length=20, verbose_name="роль пользователя", choices=Roles)
-    image = models.ImageField(upload_to="product/photo", verbose_name="аватарка пользоавателя", **NULLABLE)
+    role = models.CharField(
+        max_length=20, verbose_name="роль пользователя", choices=Roles
+    )
+    image = models.ImageField(
+        upload_to="product/photo", verbose_name="аватарка пользоавателя", **NULLABLE
+    )
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
@@ -28,6 +30,3 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
-
-
-

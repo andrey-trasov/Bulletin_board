@@ -8,6 +8,7 @@ class AnnouncementSerializer(ModelSerializer):
         model = Announcement
         fields = "__all__"
 
+
 class FeedbackSerializer(ModelSerializer):
     class Meta:
         model = Feedback

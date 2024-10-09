@@ -8,12 +8,11 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 
 INSTALLED_APPS = [
@@ -23,7 +22,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     "rest_framework",
     "corsheaders",
     "drf_yasg",
@@ -33,7 +31,6 @@ INSTALLED_APPS = [
     "django_filters",
     "djoser",
     "rest_framework.authtoken",
-
 ]
 
 MIDDLEWARE = [
@@ -68,16 +65,15 @@ TEMPLATES = [
 WSGI_APPLICATION = "myproject.wsgi.application"
 
 
-
 DATABASES = {
-   "default": {
-       "ENGINE": "django.db.backends.postgresql_psycopg2",
-       'NAME': os.getenv('NAME'),
-       'USER':  os.getenv('USER'),
-       'PASSWORD': os.getenv('PASSWORD'),
-       'HOST': os.getenv('HOST'),
-       'PORT': os.getenv('PORT')
-   }
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": os.getenv("NAME"),
+        "USER": os.getenv("USER"),
+        "PASSWORD": os.getenv("PASSWORD"),
+        "HOST": os.getenv("HOST"),
+        "PORT": os.getenv("PORT"),
+    }
 }
 
 
@@ -111,46 +107,52 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 CORS_ALLOWED_ORIGINS = [
-   "https://read-only.example.com",
-   "https://read-and-write.example.com",
+    "https://read-only.example.com",
+    "https://read-and-write.example.com",
 ]
 
 
 CSRF_TRUSTED_ORIGINS = [
-   "http://127.0.0.1:8000/",
+    "http://127.0.0.1:8000/",
 ]
 
-AUTH_USER_MODEL = 'user.User'
+AUTH_USER_MODEL = "user.User"
 
 REST_FRAMEWORK = {
-    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated",],
-    "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_simplejwt.authentication.JWTAuthentication",
-                                       "rest_framework.authentication.TokenAuthentication",),
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+    ),
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=500),    ############################# поменять на 5 минут
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'AUTH_HEADER_TYPES': ('JWT',),
+    "ACCESS_TOKEN_LIFETIME": timedelta(
+        minutes=500
+    ),  ############################# поменять на 5 минут
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "AUTH_HEADER_TYPES": ("JWT",),
 }
 
 DJOSER = {
-    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
-    'ACTIVATION_URL': '#/activate/{uid}/{token}',
-    'SEND_ACTIVATION_EMAIL': False,    #регистрация пользователя без подтверждения имейла
-    'SERIALIZERS': {
-        'user_create': 'user.serializers.UserSerializer',    #еспользуется мой serializers для регистрации
-        'user': 'user.serializers.UserSerializer',
-                     },
+    "PASSWORD_RESET_CONFIRM_URL": "#/password/reset/confirm/{uid}/{token}",
+    "USERNAME_RESET_CONFIRM_URL": "#/username/reset/confirm/{uid}/{token}",
+    "ACTIVATION_URL": "#/activate/{uid}/{token}",
+    "SEND_ACTIVATION_EMAIL": False,  # регистрация пользователя без подтверждения имейла
+    "SERIALIZERS": {
+        "user_create": "user.serializers.UserSerializer",  # еспользуется мой serializers для регистрации
+        "user": "user.serializers.UserSerializer",
+    },
 }
 
-EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_HOST = "smtp.mail.ru"
 EMAIL_PORT = 2525
 EMAIL_HOST_USER = "py.ma.1@mail.ru"
 EMAIL_HOST_PASSWORD = "kc0uSNRYAXFdwEwqNapj"
